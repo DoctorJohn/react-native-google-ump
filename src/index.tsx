@@ -41,11 +41,13 @@ export type ConsentRequestParameters = {
   testDeviceHashedIds?: string[];
   debugGeography?: DebugGeography;
   forceTesting?: boolean;
-}
+};
 
 export default {
-  requestConsentInfoUpdate(consentRequestParameters: ConsentRequestParameters) {
-    return GoogleUMP.requestConsentInfoUpdate(consentRequestParameters);
+  requestConsentInfoUpdate(
+    consentRequestParameters?: ConsentRequestParameters
+  ) {
+    return GoogleUMP.requestConsentInfoUpdate(consentRequestParameters ?? {});
   },
 
   getConsentInfo(): Promise<ConsentInfo> {

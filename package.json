@@ -24,7 +24,7 @@
   "scripts": {
     "test": "jest",
     "lint": "yarn lint:js && yarn lint:ts && yarn lint:android && yarn lint:ios",
-    "lint:js": "eslint \"**/*.{js,ts,tsx}\"",
+    "lint:js": "eslint \"**/*.{js,ts,tsx}\" --max-warnings=0",
     "lint:ts": "tsc --noEmit",
     "lint:android": "google-java-format --set-exit-if-changed --dry-run --glob=\"android/**/*.java\"",
     "lint:ios": "clang-format --glob=\"ios/**/*.{h,cpp,m,mm}\" --style=Google -n -Werror",

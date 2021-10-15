@@ -7,9 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-
-		5E555C0D2413F4C50049A1A2 /* GoogleUMP.m in Sources */ = {isa = PBXBuildFile; fileRef = B3E7B5891CC2AC0600A0062D /* GoogleUMP.m */; };
-
+		8E2DDF312718DB960088426F /* GoogleUMPUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E2DDF302718DB960088426F /* GoogleUMPUtils.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -26,10 +24,10 @@
 
 /* Begin PBXFileReference section */
 		134814201AA4EA6300B7C361 /* libGoogleUMP.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libGoogleUMP.a; sourceTree = BUILT_PRODUCTS_DIR; };
-
+		8E2DDF2F2718DB5E0088426F /* GoogleUMPUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GoogleUMPUtils.h; sourceTree = "<group>"; };
+		8E2DDF302718DB960088426F /* GoogleUMPUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GoogleUMPUtils.m; sourceTree = "<group>"; };
 		B3E7B5881CC2AC0600A0062D /* GoogleUMP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoogleUMP.h; sourceTree = "<group>"; };
 		B3E7B5891CC2AC0600A0062D /* GoogleUMP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoogleUMP.m; sourceTree = "<group>"; };
-
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,10 +52,10 @@
 		58B511D21A9E6C8500147676 = {
 			isa = PBXGroup;
 			children = (
-
+				8E2DDF302718DB960088426F /* GoogleUMPUtils.m */,
+				8E2DDF2F2718DB5E0088426F /* GoogleUMPUtils.h */,
 				B3E7B5881CC2AC0600A0062D /* GoogleUMP.h */,
 				B3E7B5891CC2AC0600A0062D /* GoogleUMP.m */,
-
 				134814211AA4EA7D00B7C361 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -119,9 +117,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-
-				B3E7B58A1CC2AC0600A0062D /* GoogleUMP.m in Sources */,
-
+				8E2DDF312718DB960088426F /* GoogleUMPUtils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -234,7 +230,6 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = GoogleUMP;
 				SKIP_INSTALL = YES;
-
 			};
 			name = Debug;
 		};
@@ -251,7 +246,6 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = GoogleUMP;
 				SKIP_INSTALL = YES;
-
 			};
 			name = Release;
 		};

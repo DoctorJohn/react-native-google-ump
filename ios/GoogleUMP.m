@@ -103,7 +103,8 @@ RCT_EXPORT_METHOD(showConsentForm
   if (consentForm == nil) {
     [GoogleUMPUtils rejectPromise:reject
                              code:@"null-consent-form"
-                          message:@"Attempted to show the consent form but it was not loaded yet."];
+                          message:@"Attempted to show the consent form but it "
+                                  @"was not loaded yet."];
     return;
   }
 

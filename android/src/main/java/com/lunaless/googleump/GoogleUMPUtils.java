@@ -13,7 +13,7 @@ public class GoogleUMPUtils {
     promise.reject(code, message, userInfo);
   }
 
-  public static String codeFromFormError(FormError formError) {
+  public static String getCodeFromError(FormError formError) {
     switch (formError.getErrorCode()) {
       case FormError.ErrorCode.INTERNAL_ERROR:
         return "consent-form-internal-error";

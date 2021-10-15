@@ -126,7 +126,7 @@ public class GoogleUMPModule extends ReactContextBaseJavaModule {
         public void onConsentInfoUpdateFailure(@NonNull FormError formError) {
           GoogleUMPUtils.rejectPromise(
             promise,
-            GoogleUMPUtils.codeFromFormError(formError),
+            GoogleUMPUtils.getCodeFromError(formError),
             formError.getMessage()
           );
         }
@@ -168,7 +168,7 @@ public class GoogleUMPModule extends ReactContextBaseJavaModule {
           public void onConsentFormLoadFailure(@NonNull FormError formError) {
             GoogleUMPUtils.rejectPromise(
               promise,
-              GoogleUMPUtils.codeFromFormError(formError),
+              GoogleUMPUtils.getCodeFromError(formError),
               formError.getMessage()
             );
           }
@@ -209,7 +209,7 @@ public class GoogleUMPModule extends ReactContextBaseJavaModule {
             } else {
               GoogleUMPUtils.rejectPromise(
                 promise,
-                GoogleUMPUtils.codeFromFormError(formError),
+                GoogleUMPUtils.getCodeFromError(formError),
                 formError.getMessage()
               );
             }

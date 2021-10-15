@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { StyleSheet, View, Button } from 'react-native';
-import UMP from 'react-native-google-ump';
+import UMP, { DebugGeography } from 'react-native-google-ump';
 
 export default function App() {
   const requestConsentInfoUpdate = async () => {
@@ -10,6 +10,28 @@ export default function App() {
       console.log('requestConsentInfoUpdate result:', result);
     } catch (error) {
       console.error('requestConsentInfoUpdate error:', error);
+    }
+  };
+
+  const requestConsentInfoUpdateEEA = async () => {
+    try {
+      const result = await UMP.requestConsentInfoUpdate({
+        debugGeography: DebugGeography.EEA,
+      });
+      console.log('requestConsentInfoUpdate (EEA) result:', result);
+    } catch (error) {
+      console.error('requestConsentInfoUpdate (EEA) error:', error);
+    }
+  };
+
+  const requestConsentInfoUpdateNotEEA = async () => {
+    try {
+      const result = await UMP.requestConsentInfoUpdate({
+        debugGeography: DebugGeography.NOT_EEA,
+      });
+      console.log('requestConsentInfoUpdate (not EEA) result:', result);
+    } catch (error) {
+      console.error('requestConsentInfoUpdate (not EEA) error:', error);
     }
   };
 
@@ -54,6 +76,16 @@ export default function App() {
       <Button
         title="Request consent info update"
         onPress={requestConsentInfoUpdate}
+      />
+      <View style={styles.spacer} />
+      <Button
+        title="Request consent info update (EEA)"
+        onPress={requestConsentInfoUpdateEEA}
+      />
+      <View style={styles.spacer} />
+      <Button
+        title="Request consent info update (not EEA)"
+        onPress={requestConsentInfoUpdateNotEEA}
       />
       <View style={styles.spacer} />
       <Button title="Get consent info" onPress={getConsentInfo} />

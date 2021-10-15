@@ -16,15 +16,15 @@ public class GoogleUMPUtils {
   public static String getCodeFromError(FormError formError) {
     switch (formError.getErrorCode()) {
       case FormError.ErrorCode.INTERNAL_ERROR:
-        return "consent-form-internal-error";
+        return "ump-internal-error";
       case FormError.ErrorCode.INTERNET_ERROR:
-        return "consent-form-internet-error";
+        return "ump-internet-error";
       case FormError.ErrorCode.INVALID_OPERATION:
-        return "consent-form-invalid-operation";
+        return "ump-invalid-operation";
       case FormError.ErrorCode.TIME_OUT:
-        return "consent-form-time-out";
+        return "ump-time-out";
       default:
-        return "consent-form-unknown-error";
+        return "ump-unknown-error";
     }
   }
 }

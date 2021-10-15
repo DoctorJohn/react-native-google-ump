@@ -1,5 +1,13 @@
 # React Native Google UMP
 
+[![NPM][npm-image]][npm-url]
+[![License][license-image]][license-url]
+
+[npm-image]: https://img.shields.io/npm/v/react-native-google-ump
+[npm-url]: https://www.npmjs.com/package/react-native-google-ump
+[license-image]: https://img.shields.io/npm/l/react-native-google-ump
+[license-url]: https://github.com/DoctorJohn/react-native-google-ump/blob/master/LICENSE
+
 React Native bindings for [Google's User Messaging Platform SDK](https://developers.google.com/admob/ump/) for Android and iOS.
 
 ## Installation

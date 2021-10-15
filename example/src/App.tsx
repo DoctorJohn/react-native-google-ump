@@ -1,37 +1,43 @@
 import * as React from 'react';
 
-import { StyleSheet, View, Button } from 'react-native';
+import { StyleSheet, View, Button, Switch, Text } from 'react-native';
 import UMP, { DebugGeography } from 'react-native-google-ump';
 
 export default function App() {
+  const [underaged, setUnderaged] = React.useState(false);
+  const [fakeEEA, setFakeEEA] = React.useState(false);
+  const [fakeNotEEA, setFakeNotEEA] = React.useState(false);
+
+  const toggleEEA = (newValue: boolean) => {
+    if (newValue) {
+      setFakeEEA(true);
+      setFakeNotEEA(false);
+    } else {
+      setFakeEEA(false);
+    }
+  };
+
+  const toggleNotEEA = (newValue: boolean) => {
+    if (newValue) {
+      setFakeNotEEA(true);
+      setFakeEEA(false);
+    } else {
+      setFakeNotEEA(false);
+    }
+  };
+
   const requestConsentInfoUpdate = async () => {
+    const debugGeography = fakeEEA
+      ? DebugGeography.EEA
+      : DebugGeography.DISABLED;
     try {
-      const result = await UMP.requestConsentInfoUpdate();
+      const result = await UMP.requestConsentInfoUpdate({
+        underAgeOfConsent: underaged,
+        debugGeography,
+      });
       console.log('requestConsentInfoUpdate result:', result);
     } catch (error) {
       console.error('requestConsentInfoUpdate error:', error);
-    }
-  };
-
-  const requestConsentInfoUpdateEEA = async () => {
-    try {
-      const result = await UMP.requestConsentInfoUpdate({
-        debugGeography: DebugGeography.EEA,
-      });
-      console.log('requestConsentInfoUpdate (EEA) result:', result);
-    } catch (error) {
-      console.error('requestConsentInfoUpdate (EEA) error:', error);
-    }
-  };
-
-  const requestConsentInfoUpdateNotEEA = async () => {
-    try {
-      const result = await UMP.requestConsentInfoUpdate({
-        debugGeography: DebugGeography.NOT_EEA,
-      });
-      console.log('requestConsentInfoUpdate (not EEA) result:', result);
-    } catch (error) {
-      console.error('requestConsentInfoUpdate (not EEA) error:', error);
     }
   };
 
@@ -73,19 +79,22 @@ export default function App() {
 
   return (
     <View style={styles.container}>
+      <View style={styles.option}>
+        <Text>Tag for under age of consent</Text>
+        <Switch value={underaged} onValueChange={setUnderaged} />
+      </View>
+      <View style={styles.option}>
+        <Text>Pretend to be in the EEA</Text>
+        <Switch value={fakeEEA} onValueChange={toggleEEA} />
+      </View>
+      <View style={styles.option}>
+        <Text>Pretend not to be in the EEA</Text>
+        <Switch value={fakeNotEEA} onValueChange={toggleNotEEA} />
+      </View>
+      <View style={styles.spacer} />
       <Button
         title="Request consent info update"
         onPress={requestConsentInfoUpdate}
-      />
-      <View style={styles.spacer} />
-      <Button
-        title="Request consent info update (EEA)"
-        onPress={requestConsentInfoUpdateEEA}
-      />
-      <View style={styles.spacer} />
-      <Button
-        title="Request consent info update (not EEA)"
-        onPress={requestConsentInfoUpdateNotEEA}
       />
       <View style={styles.spacer} />
       <Button title="Get consent info" onPress={getConsentInfo} />
@@ -104,6 +113,10 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     padding: 32,
+  },
+  option: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   button: {
     backgroundColor: 'blue',

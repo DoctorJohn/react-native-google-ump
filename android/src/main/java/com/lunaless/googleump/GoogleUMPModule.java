@@ -3,7 +3,6 @@ package com.lunaless.googleump;
 import android.app.Activity;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.Promise;
@@ -19,7 +18,6 @@ import com.google.android.ump.ConsentDebugSettings;
 import com.google.android.ump.ConsentForm;
 import com.google.android.ump.ConsentInformation;
 import com.google.android.ump.ConsentRequestParameters;
-import com.google.android.ump.FormError;
 import com.google.android.ump.UserMessagingPlatform;
 
 import java.util.HashMap;
@@ -115,22 +113,12 @@ public class GoogleUMPModule extends ReactContextBaseJavaModule {
     consentInformation.requestConsentInfoUpdate(
       currentActivity,
       params,
-      new ConsentInformation.OnConsentInfoUpdateSuccessListener() {
-        @Override
-        public void onConsentInfoUpdateSuccess() {
-          promise.resolve(null);
-        }
-      },
-      new ConsentInformation.OnConsentInfoUpdateFailureListener() {
-        @Override
-        public void onConsentInfoUpdateFailure(@NonNull FormError formError) {
-          GoogleUMPUtils.rejectPromise(
-            promise,
-            GoogleUMPUtils.getCodeFromError(formError),
-            formError.getMessage()
-          );
-        }
-      });
+      () -> promise.resolve(null),
+      formError -> GoogleUMPUtils.rejectPromise(
+        promise,
+        GoogleUMPUtils.getCodeFromError(formError),
+        formError.getMessage()
+      ));
   }
 
   @ReactMethod
@@ -156,23 +144,15 @@ public class GoogleUMPModule extends ReactContextBaseJavaModule {
     currentActivity.runOnUiThread(() -> {
       UserMessagingPlatform.loadConsentForm(
         currentActivity,
-        new UserMessagingPlatform.OnConsentFormLoadSuccessListener() {
-          @Override
-          public void onConsentFormLoadSuccess(@Nullable ConsentForm consentForm) {
-            GoogleUMPModule.this.consentForm = consentForm;
-            promise.resolve(null);
-          }
+        consentForm -> {
+          GoogleUMPModule.this.consentForm = consentForm;
+          promise.resolve(null);
         },
-        new UserMessagingPlatform.OnConsentFormLoadFailureListener() {
-          @Override
-          public void onConsentFormLoadFailure(@NonNull FormError formError) {
-            GoogleUMPUtils.rejectPromise(
-              promise,
-              GoogleUMPUtils.getCodeFromError(formError),
-              formError.getMessage()
-            );
-          }
-        }
+        formError -> GoogleUMPUtils.rejectPromise(
+          promise,
+          GoogleUMPUtils.getCodeFromError(formError),
+          formError.getMessage()
+        )
       );
     });
   }
@@ -201,18 +181,15 @@ public class GoogleUMPModule extends ReactContextBaseJavaModule {
     currentActivity.runOnUiThread(() -> {
       consentForm.show(
         currentActivity,
-        new ConsentForm.OnConsentFormDismissedListener() {
-          @Override
-          public void onConsentFormDismissed(@Nullable FormError formError) {
-            if (formError == null) {
-              promise.resolve(null);
-            } else {
-              GoogleUMPUtils.rejectPromise(
-                promise,
-                GoogleUMPUtils.getCodeFromError(formError),
-                formError.getMessage()
-              );
-            }
+        formError -> {
+          if (formError == null) {
+            promise.resolve(null);
+          } else {
+            GoogleUMPUtils.rejectPromise(
+              promise,
+              GoogleUMPUtils.getCodeFromError(formError),
+              formError.getMessage()
+            );
           }
         }
       );

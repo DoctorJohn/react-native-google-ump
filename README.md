@@ -11,7 +11,7 @@ npm install react-native-google-ump
 ## Usage
 
 ```js
-import { multiply } from "react-native-google-ump";
+import { multiply } from 'react-native-google-ump';
 
 // ...
 

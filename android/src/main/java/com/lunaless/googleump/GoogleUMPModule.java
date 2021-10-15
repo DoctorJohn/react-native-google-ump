@@ -170,6 +170,15 @@ public class GoogleUMPModule extends ReactContextBaseJavaModule {
       return;
     }
 
+    if (consentForm == null) {
+      GoogleUMPUtils.rejectPromise(
+        promise,
+        "null-consent-form",
+        "Attempted to show the consent form but it was not loaded yet."
+      );
+      return;
+    }
+
     currentActivity.runOnUiThread(() -> {
       consentForm.show(
         currentActivity,

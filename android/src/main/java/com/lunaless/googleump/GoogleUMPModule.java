@@ -141,20 +141,18 @@ public class GoogleUMPModule extends ReactContextBaseJavaModule {
       return;
     }
 
-    currentActivity.runOnUiThread(() -> {
-      UserMessagingPlatform.loadConsentForm(
-        currentActivity,
-        consentForm -> {
-          GoogleUMPModule.this.consentForm = consentForm;
-          promise.resolve(null);
-        },
-        formError -> GoogleUMPUtils.rejectPromise(
-          promise,
-          GoogleUMPUtils.getCodeFromError(formError),
-          formError.getMessage()
-        )
-      );
-    });
+    currentActivity.runOnUiThread(() -> UserMessagingPlatform.loadConsentForm(
+      currentActivity,
+      consentForm -> {
+        GoogleUMPModule.this.consentForm = consentForm;
+        promise.resolve(null);
+      },
+      formError -> GoogleUMPUtils.rejectPromise(
+        promise,
+        GoogleUMPUtils.getCodeFromError(formError),
+        formError.getMessage()
+      )
+    ));
   }
 
   @ReactMethod
@@ -178,22 +176,20 @@ public class GoogleUMPModule extends ReactContextBaseJavaModule {
       return;
     }
 
-    currentActivity.runOnUiThread(() -> {
-      consentForm.show(
-        currentActivity,
-        formError -> {
-          if (formError == null) {
-            promise.resolve(null);
-          } else {
-            GoogleUMPUtils.rejectPromise(
-              promise,
-              GoogleUMPUtils.getCodeFromError(formError),
-              formError.getMessage()
-            );
-          }
+    currentActivity.runOnUiThread(() -> consentForm.show(
+      currentActivity,
+      formError -> {
+        if (formError == null) {
+          promise.resolve(null);
+        } else {
+          GoogleUMPUtils.rejectPromise(
+            promise,
+            GoogleUMPUtils.getCodeFromError(formError),
+            formError.getMessage()
+          );
         }
-      );
-    });
+      }
+    ));
   }
 
   @ReactMethod

@@ -35,14 +35,13 @@ yarn example ios
 Make sure your code passes TypeScript and ESLint. Run the following to verify:
 
 ```sh
-yarn typescript
 yarn lint
 ```
 
 To fix formatting errors, run the following:
 
 ```sh
-yarn lint --fix
+yarn format
 ```
 
 Remember to add tests for your change if possible. Run the unit tests by:
@@ -91,8 +90,8 @@ yarn release
 The `package.json` file contains various scripts for common tasks:
 
 - `yarn bootstrap`: setup project by installing all dependencies and pods.
-- `yarn typescript`: type-check files with TypeScript.
-- `yarn lint`: lint files with ESLint.
+- `yarn format`: format files with ESLint/prettier/clang-format/google-java-format.
+- `yarn lint`: lint files with ESLint/clang-format/google-java-format and the Typescript compiler.
 - `yarn test`: run unit tests with Jest.
 - `yarn example start`: start the Metro server for the example app.
 - `yarn example android`: run the example app on Android.

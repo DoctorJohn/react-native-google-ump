@@ -22,6 +22,9 @@ import com.google.android.ump.ConsentRequestParameters;
 import com.google.android.ump.FormError;
 import com.google.android.ump.UserMessagingPlatform;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @ReactModule(name = GoogleUMPModule.NAME)
 public class GoogleUMPModule extends ReactContextBaseJavaModule {
   public static final String NAME = "GoogleUMP";
@@ -37,6 +40,22 @@ public class GoogleUMPModule extends ReactContextBaseJavaModule {
   @NonNull
   public String getName() {
     return NAME;
+  }
+
+  @Override
+  public Map<String, Object> getConstants() {
+    final Map<String, Object> constants = new HashMap<>();
+
+    constants.put("CONSENT_STATUS_UNKNOWN", ConsentInformation.ConsentStatus.UNKNOWN);
+    constants.put("CONSENT_STATUS_NOT_REQUIRED", ConsentInformation.ConsentStatus.NOT_REQUIRED);
+    constants.put("CONSENT_STATUS_REQUIRED", ConsentInformation.ConsentStatus.REQUIRED);
+    constants.put("CONSENT_STATUS_OBTAINED", ConsentInformation.ConsentStatus.OBTAINED);
+
+    constants.put("DEBUG_GEOGRAPHY_DISABLED", ConsentDebugSettings.DebugGeography.DEBUG_GEOGRAPHY_DISABLED);
+    constants.put("DEBUG_GEOGRAPHY_EEA", ConsentDebugSettings.DebugGeography.DEBUG_GEOGRAPHY_EEA);
+    constants.put("DEBUG_GEOGRAPHY_NOT_EEA", ConsentDebugSettings.DebugGeography.DEBUG_GEOGRAPHY_NOT_EEA);
+
+    return constants;
   }
 
   ConsentRequestParameters buildRequestParameters(ReadableMap options) {

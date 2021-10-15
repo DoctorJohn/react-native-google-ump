@@ -17,23 +17,33 @@ const GoogleUMP = NativeModules.GoogleUMP
       }
     );
 
+const {
+  CONSENT_STATUS_UNKNOWN,
+  CONSENT_STATUS_NOT_REQUIRED,
+  CONSENT_STATUS_REQUIRED,
+  CONSENT_STATUS_OBTAINED,
+  DEBUG_GEOGRAPHY_DISABLED,
+  DEBUG_GEOGRAPHY_EEA,
+  DEBUG_GEOGRAPHY_NOT_EEA,
+} = GoogleUMP.getConstants();
+
 export enum ConsentStatus {
-  UNKNOWN = 0,
-  NOT_REQUIRED = 1,
-  REQUIRED = 2,
-  OBTAINED = 3,
+  UNKNOWN = CONSENT_STATUS_UNKNOWN,
+  NOT_REQUIRED = CONSENT_STATUS_NOT_REQUIRED,
+  REQUIRED = CONSENT_STATUS_REQUIRED,
+  OBTAINED = CONSENT_STATUS_OBTAINED,
+}
+
+export enum DebugGeography {
+  DISABLED = DEBUG_GEOGRAPHY_DISABLED,
+  EEA = DEBUG_GEOGRAPHY_EEA,
+  NOT_EEA = DEBUG_GEOGRAPHY_NOT_EEA,
 }
 
 export type ConsentInfo = {
   consentStatus: ConsentStatus;
   consentFormAvailable: boolean;
 };
-
-export enum DebugGeography {
-  DISABLED = 0,
-  EEA = 1,
-  NOT_EEA = 2,
-}
 
 export type ConsentRequestParameters = {
   adMobAppId?: string;
